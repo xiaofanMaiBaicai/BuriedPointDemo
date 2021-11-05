@@ -24,6 +24,7 @@
 		2484E3B126F0741B00E4C44F /* UITableView+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2484E3B026F0741B00E4C44F /* UITableView+SensorsData.m */; };
 		2484E3B626F0A1BD00E4C44F /* SensorsAnalyticsDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2484E3B526F0A1BD00E4C44F /* SensorsAnalyticsDelegateProxy.m */; };
 		2495DE6226FA1AAF0064381D /* UIGestureRecognizer+SensorsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2495DE6126FA1AAF0064381D /* UIGestureRecognizer+SensorsData.m */; };
+		24F9A00C27350FE0006007A4 /* SensorsAnalyticsDynamicDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F9A00B27350FE0006007A4 /* SensorsAnalyticsDynamicDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,8 @@
 		2484E3B526F0A1BD00E4C44F /* SensorsAnalyticsDelegateProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsDelegateProxy.m; sourceTree = "<group>"; };
 		2495DE6026FA1AAF0064381D /* UIGestureRecognizer+SensorsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+SensorsData.h"; sourceTree = "<group>"; };
 		2495DE6126FA1AAF0064381D /* UIGestureRecognizer+SensorsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+SensorsData.m"; sourceTree = "<group>"; };
+		24F9A00A27350FE0006007A4 /* SensorsAnalyticsDynamicDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorsAnalyticsDynamicDelegate.h; sourceTree = "<group>"; };
+		24F9A00B27350FE0006007A4 /* SensorsAnalyticsDynamicDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorsAnalyticsDynamicDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,20 +113,12 @@
 		2484E39F26EEF43700E4C44F /* Point */ = {
 			isa = PBXGroup;
 			children = (
+				24F9A00D27352284006007A4 /* CellClick */,
+				24F9A00927310FC9006007A4 /* Category */,
 				2484E3A026EEF45900E4C44F /* SensorsAnalyticsSDK.h */,
 				2484E3A126EEF45900E4C44F /* SensorsAnalyticsSDK.m */,
 				2484E3A326EEFE4700E4C44F /* NSObject+SASwizzler.h */,
 				2484E3A426EEFE4700E4C44F /* NSObject+SASwizzler.m */,
-				2484E3B426F0A1BD00E4C44F /* SensorsAnalyticsDelegateProxy.h */,
-				2484E3B526F0A1BD00E4C44F /* SensorsAnalyticsDelegateProxy.m */,
-				2484E3A626EF005700E4C44F /* UIViewController+SensorsData.h */,
-				2484E3A726EF005700E4C44F /* UIViewController+SensorsData.m */,
-				2484E3A926EF18CC00E4C44F /* UIApplication+SensorsData.h */,
-				2484E3AA26EF18CC00E4C44F /* UIApplication+SensorsData.m */,
-				2484E3AC26EF270400E4C44F /* UIView+SensorsData.h */,
-				2484E3AD26EF270400E4C44F /* UIView+SensorsData.m */,
-				2484E3AF26F0741B00E4C44F /* UITableView+SensorsData.h */,
-				2484E3B026F0741B00E4C44F /* UITableView+SensorsData.m */,
 				2495DE6026FA1AAF0064381D /* UIGestureRecognizer+SensorsData.h */,
 				2495DE6126FA1AAF0064381D /* UIGestureRecognizer+SensorsData.m */,
 				241E0E5B26FC4ABD00295C0C /* SensorsAnalyticsFileStore.h */,
@@ -132,6 +127,32 @@
 				241E0E5F26FC61B900295C0C /* SensorsAnalyticsExceptionHandler.m */,
 			);
 			path = Point;
+			sourceTree = "<group>";
+		};
+		24F9A00927310FC9006007A4 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				2484E3A626EF005700E4C44F /* UIViewController+SensorsData.h */,
+				2484E3A726EF005700E4C44F /* UIViewController+SensorsData.m */,
+				2484E3A926EF18CC00E4C44F /* UIApplication+SensorsData.h */,
+				2484E3AA26EF18CC00E4C44F /* UIApplication+SensorsData.m */,
+				2484E3AC26EF270400E4C44F /* UIView+SensorsData.h */,
+				2484E3AD26EF270400E4C44F /* UIView+SensorsData.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		24F9A00D27352284006007A4 /* CellClick */ = {
+			isa = PBXGroup;
+			children = (
+				24F9A00A27350FE0006007A4 /* SensorsAnalyticsDynamicDelegate.h */,
+				24F9A00B27350FE0006007A4 /* SensorsAnalyticsDynamicDelegate.m */,
+				2484E3B426F0A1BD00E4C44F /* SensorsAnalyticsDelegateProxy.h */,
+				2484E3B526F0A1BD00E4C44F /* SensorsAnalyticsDelegateProxy.m */,
+				2484E3AF26F0741B00E4C44F /* UITableView+SensorsData.h */,
+				2484E3B026F0741B00E4C44F /* UITableView+SensorsData.m */,
+			);
+			path = CellClick;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24F9A00C27350FE0006007A4 /* SensorsAnalyticsDynamicDelegate.m in Sources */,
 				2484E3A226EEF45900E4C44F /* SensorsAnalyticsSDK.m in Sources */,
 				2484E3B626F0A1BD00E4C44F /* SensorsAnalyticsDelegateProxy.m in Sources */,
 				2484E3B126F0741B00E4C44F /* UITableView+SensorsData.m in Sources */,

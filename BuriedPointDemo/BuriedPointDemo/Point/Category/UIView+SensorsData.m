@@ -9,6 +9,10 @@
 
 @implementation UIView (SensorsData)
 
+- (NSString *)sensorsdata_elementType {
+    return NSStringFromClass([self class]);
+}
+
 - (UIViewController*)sensorsdata_viewController{
     UIResponder *responder = self;
     while ((responder = [responder nextResponder])) {

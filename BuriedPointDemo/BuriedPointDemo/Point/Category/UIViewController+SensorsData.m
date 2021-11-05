@@ -12,6 +12,7 @@
 @implementation UIViewController (SensorsData)
 
 + (void)load{
+    
     [UIViewController sensorsdata_swizzleMethod:@selector(viewDidAppear:) withMethod:@selector(sensorsdata_viewDidAppear:)];
 }
 
@@ -19,7 +20,9 @@
     [self sensorsdata_viewDidAppear:animated];
     
     NSMutableDictionary *properties=[NSMutableDictionary dictionary];
+    
     [properties setValue:NSStringFromClass([self class]) forKey:@"$screen_name"];
+    
     [[SensorsAnalyticsSDK sharedInstance]track:@"$AppViewScreen"properties:properties];
 }
 
