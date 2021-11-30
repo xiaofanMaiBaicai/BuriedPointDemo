@@ -23,7 +23,7 @@
 @property (nonatomic, assign) BOOL applicationWillResignActive;
 
 /// 是否为被动启动
-@property (nonatomic, getter=isLaunchedPassively) BOOL launchedPassively;
+@property (nonatomic,assign) BOOL launchedPassively;
 
 
 
@@ -191,21 +191,25 @@
     
     // 将被动启动标记设为NO，正常记录事件
     self.launchedPassively = NO;
-
-    
     [self track:@"$AppStart" properties:nil];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
     //标记已接收到UIApplicationWillResignActiveNotification本地通知
-    self.applicationWillResignActive = YES;
+    //打开即可完成优化
+//    self.applicationWillResignActive = YES;
+    NSLog(@"UIApplicationWillResignActiveNotification");
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     // 触发被动启动事件
-    if (self.isLaunchedPassively) {
-        [self track:@"$AppStartPassively" properties:nil];
-    }
+    
+    [self track:@"$AppStartPassively" properties:nil];
+    
+    // 打开即可
+//    if (self.launchedPassively) {
+//        [self track:@"$AppStartPassively" properties:nil];
+//    }
 }
 
 #pragma mark - 事件持续时间

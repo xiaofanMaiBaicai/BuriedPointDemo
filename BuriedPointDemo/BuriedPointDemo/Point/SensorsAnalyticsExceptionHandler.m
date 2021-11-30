@@ -34,6 +34,7 @@ static NSString * const SensorDataSignalExceptionHandlerUserInfo = @"SignalExcep
     self = [super init];
     if (self) {
         _previousExceptionHandler =  NSGetUncaughtExceptionHandler();
+        
         NSSetUncaughtExceptionHandler(&sensorsdata_uncaught_exception_handler);
         
         // 定义信号集结构体
@@ -48,7 +49,9 @@ static NSString * const SensorDataSignalExceptionHandlerUserInfo = @"SignalExcep
         int signals[] = {SIGILL, SIGABRT, SIGBUS, SIGFPE, SIGSEGV};
         for (int i = 0; i < sizeof(signals) / sizeof(int); i++) {
             // 注册信号处理
-            int err = sigaction(signals[i], &sig, NULL); if (err) { NSLog(@"Errored while trying to set up sigaction for signal %d", signals[i]);
+            int err = sigaction(signals[i], &sig, NULL);
+            if (err) {
+                NSLog(@"Errored while trying to set up sigaction for signal %d", signals[i]);
             }
         }
     }
@@ -65,6 +68,7 @@ static NSString * const SensorDataSignalExceptionHandlerUserInfo = @"SignalExcep
 
 #pragma mark - Public SEL
 
+//NSException异常
 static void sensorsdata_uncaught_exception_handler(NSException *exception) {
     // 采集$AppCrashed事件
     [[SensorsAnalyticsExceptionHandler sharedInstance] trackAppCrashedWithException:exception];
@@ -76,12 +80,17 @@ static void sensorsdata_uncaught_exception_handler(NSException *exception) {
     }
 }
 
+// Unix
 static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info, void *context) {
     
     NSDictionary *userInfo = @{SensorDataSignalExceptionHandlerUserInfo: @(sig)};
+    
     NSString *reason = [NSString stringWithFormat:@"Signal %d was raised.", sig];
+    
     NSException *exception = [NSException exceptionWithName:SensorDataSignalExceptionHandlerName reason:reason userInfo:userInfo];
+    
     SensorsAnalyticsExceptionHandler *handler = [SensorsAnalyticsExceptionHandler sharedInstance];
+    
     [handler trackAppCrashedWithException:exception];
 }
 
@@ -89,7 +98,9 @@ static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info
 
 #pragma mark - Private SEL
 
-- (void)trackAppCrashedWithException:(NSException *)exception { NSMutableDictionary *properties = [NSMutableDictionary dictionary];
+- (void)trackAppCrashedWithException:(NSException *)exception {
+    
+    NSMutableDictionary *properties = [NSMutableDictionary dictionary];
     // 异常名称
     NSString *name = [exception name];
     // 出现异常的原因
@@ -101,8 +112,12 @@ static void sensorsdata_signal_exception_handler(int sig, struct __siginfo *info
     // 设置$AppCrashed的事件属性$app_crashed_reason
     properties[@"$app_crashed_reason"] = exceptionInfo;
     
-    
+    // 补充 $AppEnd
+    [[SensorsAnalyticsSDK sharedInstance] track:@"$AppEnd" properties:nil];
     [[SensorsAnalyticsSDK sharedInstance] track:@"$AppCrashed" properties:properties];
+    
+    // TODO 阻塞当前线程，使$AppCrashed、$AppEnd事件完成入库
+    //
     
     NSSetUncaughtExceptionHandler(NULL);
     

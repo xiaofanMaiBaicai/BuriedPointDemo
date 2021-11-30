@@ -19,10 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
-//    btn.backgroundColor = [UIColor redColor];
-//    [btn addTarget:self action:@selector(_lalal) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+    btn.backgroundColor = [UIColor redColor];
+    [btn addTarget:self action:@selector(_lalal) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
     
 //    UITableView *lalaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 375, 667)];
 //    lalaTableView.delegate = self;
