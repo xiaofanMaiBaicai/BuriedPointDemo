@@ -119,8 +119,6 @@
 				2484E3A126EEF45900E4C44F /* SensorsAnalyticsSDK.m */,
 				2484E3A326EEFE4700E4C44F /* NSObject+SASwizzler.h */,
 				2484E3A426EEFE4700E4C44F /* NSObject+SASwizzler.m */,
-				2495DE6026FA1AAF0064381D /* UIGestureRecognizer+SensorsData.h */,
-				2495DE6126FA1AAF0064381D /* UIGestureRecognizer+SensorsData.m */,
 				241E0E5B26FC4ABD00295C0C /* SensorsAnalyticsFileStore.h */,
 				241E0E5C26FC4ABD00295C0C /* SensorsAnalyticsFileStore.m */,
 				241E0E5E26FC61B900295C0C /* SensorsAnalyticsExceptionHandler.h */,
@@ -138,6 +136,8 @@
 				2484E3AA26EF18CC00E4C44F /* UIApplication+SensorsData.m */,
 				2484E3AC26EF270400E4C44F /* UIView+SensorsData.h */,
 				2484E3AD26EF270400E4C44F /* UIView+SensorsData.m */,
+				2495DE6026FA1AAF0064381D /* UIGestureRecognizer+SensorsData.h */,
+				2495DE6126FA1AAF0064381D /* UIGestureRecognizer+SensorsData.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";

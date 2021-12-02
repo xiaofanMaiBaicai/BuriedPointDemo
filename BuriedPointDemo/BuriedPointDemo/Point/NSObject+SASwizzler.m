@@ -15,6 +15,7 @@
 /// 方法交互
 /// @param originalSEL 原方法
 /// @param alternateSEL 要交换的方法名称
+/// 
 +(BOOL)sensorsdata_swizzleMethod:(SEL)originalSEL withMethod:(SEL)alternateSEL{
     Method originalMethod = class_getInstanceMethod(self, originalSEL);
     if (!originalMethod) {

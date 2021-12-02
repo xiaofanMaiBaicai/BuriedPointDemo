@@ -20,7 +20,9 @@
     [self sensorsdata_viewDidAppear:animated];
 
     NSMutableDictionary *properties=[NSMutableDictionary dictionary];
+    
     [properties setValue:NSStringFromClass([self class]) forKey:@"$screen_name"];
+    
     [[SensorsAnalyticsSDK sharedInstance]track:@"$AppViewScreen"properties:properties];
 }
 

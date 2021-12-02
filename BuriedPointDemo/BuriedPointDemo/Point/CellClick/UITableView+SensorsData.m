@@ -20,14 +20,14 @@
 
 - (void)sensorsdata_setDelegate:(id<UITableViewDelegate>)delegate{
     // 方案三：消息转发
-//    self.sensorsdata_delegateProxy = nil;
-//    if (delegate) {
-//        SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
-//        self.sensorsdata_delegateProxy = proxy;
-//        [self sensorsdata_setDelegate:proxy];
-//    } else {
-//        [self sensorsdata_setDelegate:nil];
-//    }
+    self.sensorsdata_delegateProxy = nil;
+    if (delegate) {
+        SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];
+        self.sensorsdata_delegateProxy = proxy;
+        [self sensorsdata_setDelegate:proxy];
+    } else {
+        [self sensorsdata_setDelegate:nil];
+    }
     
     // 方案一：方法交换
     

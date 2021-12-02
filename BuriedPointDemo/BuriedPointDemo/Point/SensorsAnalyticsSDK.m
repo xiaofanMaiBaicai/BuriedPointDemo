@@ -57,8 +57,11 @@
 
 - (instancetype)init{
     if (self = [super init]) {
+        
         _automaticProperties = [self collectAutomaticProperties];
+        
         _launchedPassively = UIApplication.sharedApplication.backgroundTimeRemaining != UIApplicationBackgroundFetchIntervalNever;
+        
         _loginId = [[NSUserDefaults standardUserDefaults] objectForKey:SensorsAnalyTicsLoginId];
         _fileStore = [[SensorsAnalyticsFileStore alloc]init];
         _trackTimer = [NSMutableDictionary dictionary];
@@ -164,22 +167,18 @@
 #pragma mark - App启动与退出
 
 - (void)setupListeners {
-    // 即当应用程序进入后台后，调用通知方法
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     
     // 回到前台
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+
+    // 即当应用程序进入后台后，调用通知方法
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     
+        
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
     
     // 被动启动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidFinishLaunching:) name:UIApplicationDidFinishLaunchingNotification object:nil];
-}
-
-- (void)applicationDidEnterBackground:(NSNotification *)notification {
-    // 触发$AppEnd事件
-    self.applicationWillResignActive = NO;
-    [self track:@"$AppEnd" properties:nil];
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
@@ -194,22 +193,24 @@
     [self track:@"$AppStart" properties:nil];
 }
 
+- (void)applicationDidEnterBackground:(NSNotification *)notification {
+    // 触发$AppEnd事件
+    self.applicationWillResignActive = NO;
+    [self track:@"$AppEnd" properties:nil];
+}
+
 - (void)applicationWillResignActive:(NSNotification *)notification {
     //标记已接收到UIApplicationWillResignActiveNotification本地通知
     //打开即可完成优化
-//    self.applicationWillResignActive = YES;
+    self.applicationWillResignActive = YES;
     NSLog(@"UIApplicationWillResignActiveNotification");
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     // 触发被动启动事件
-    
-    [self track:@"$AppStartPassively" properties:nil];
-    
-    // 打开即可
-//    if (self.launchedPassively) {
-//        [self track:@"$AppStartPassively" properties:nil];
-//    }
+    if (self.launchedPassively) {
+        [self track:@"$AppStartPassively" properties:nil];
+    }
 }
 
 #pragma mark - 事件持续时间

@@ -27,7 +27,8 @@
     return [(NSObject *)self.delegate methodSignatureForSelector:selector];
 }
 
-- (void)forwardInvocation:(NSInvocation *)invocation { // 先执行delegate对象中的方法
+- (void)forwardInvocation:(NSInvocation *)invocation {
+    // 先执行delegate对象中的方法
     [invocation invokeWithTarget:self.delegate];
 //     判断是否是cell的点击事件的代理方法
     if (invocation.selector == @selector(tableView:didSelectRowAtIndexPath:)) {
@@ -36,6 +37,7 @@
         // 执行数据采集相关的方法
         [invocation invokeWithTarget:self];
     }
+    
 }
 
 #pragma mark - Public SEL
@@ -49,6 +51,7 @@
 #pragma mark - Private SEL
 
 - (void)sensorsdata_tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     
     [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithTableView:tableView didSelectRowAtIndexPath:indexPath properties:nil];
 }

@@ -19,12 +19,14 @@
 
 - (instancetype)sensorsdata_initWithTarget:(id)target action:(SEL)action{
     [self sensorsdata_initWithTarget:target action:action];
+    
     [self addTarget:target action:action];
     return self;
 }
 
 - (void)sensorsdata_addTarget:(id)target action:(SEL)action{
     [self sensorsdata_addTarget:target action:action];
+    
     [self sensorsdata_addTarget:self action:@selector(sensorsdata_trackTapGestureAction:)];
 }
 
